@@ -15,10 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/items/create', 'ItemController@create'); // menampilkan halaman form
-Route::post('/items', 'ItemController@store'); // menyimpan data
-Route::get('/items', 'ItemController@index'); // menampilkan semua
-Route::get('/items/{id}', 'ItemController@show'); // menampilkan detail item dengan id 
-Route::get('/items/{id}/edit', 'ItemController@edit'); // menampilkan form untuk edit item
-Route::put('/items/{id}', 'ItemController@update'); // menyimpan perubahan dari form edit
-Route::delete('/items/{id}', 'ItemController@destroy'); // menghapus data dengan id
+Route::get('/artikel/create', 'ArtikelController@create')->middleware('auth'); // menampilkan halaman form
+Route::post('/artikel', 'ArtikelController@store')->middleware('auth'); // menyimpan data
+Route::get('/artikel', 'ArtikelController@index'); // menampilkan semua
+Route::get('/artikel/{id}', 'ArtikelController@show'); // menampilkan detail item dengan id
+Route::get('/artikel/{id}/edit', 'ArtikelController@edit')->middleware('auth'); // menampilkan form untuk edit item
+Route::put('/artikel/{id}', 'ArtikelController@update')->middleware('auth'); // menyimpan perubahan dari form edit
+Route::delete('/artikel/{id}', 'ArtikelController@destroy')->middleware('auth'); // menghapus data dengan id
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
